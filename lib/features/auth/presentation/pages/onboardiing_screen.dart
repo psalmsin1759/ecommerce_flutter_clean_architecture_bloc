@@ -1,0 +1,164 @@
+import 'package:flutter/material.dart';
+import 'package:julybyoma_app/features/home/home.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+class OnboardingScreen extends StatefulWidget {
+  const OnboardingScreen({super.key});
+
+  @override
+  State<OnboardingScreen> createState() => _OnboardingScreenState();
+}
+
+class _OnboardingScreenState extends State<OnboardingScreen> {
+  final PageController _controller = PageController();
+  int _currentPage = 0;
+
+  final List<Map<String, String>> onboardingData = [
+    {
+      "image": "assets/images/onboard1.png",
+      "title": "Welcome to JulyByOma",
+      "description":
+          "Discover amazing features that make your journey smooth and exciting.",
+    },
+    {
+      "image": "assets/images/onboard2.png",
+      "title": "Track Your Progress",
+      "description":
+          "Easily manage and track everything right from your dashboard.",
+    },
+    {
+      "image": "assets/images/onboard3.png",
+      "title": "Stay Connected",
+      "description": "Engage with the community and stay updated always.",
+    },
+  ];
+
+  void _goToHome() {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => const HomeWidget()),
+    );
+  }
+
+  void _nextPage() {
+    if (_currentPage < onboardingData.length - 1) {
+      _controller.nextPage(
+        duration: const Duration(milliseconds: 400),
+        curve: Curves.easeInOut,
+      );
+    } else {
+      _goToHome();
+    }
+  }
+
+  void _prevPage() {
+    if (_currentPage > 0) {
+      _controller.previousPage(
+        duration: const Duration(milliseconds: 400),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  if (_currentPage > 0)
+                    TextButton(
+                      onPressed: _prevPage,
+                      child: const Text("Previous"),
+                    )
+                  else
+                    const SizedBox(width: 80),
+
+                  TextButton(
+                    onPressed: () {
+                      _goToHome();
+                    },
+                    child: const Text("Skip"),
+                  ),
+                ],
+              ),
+            ),
+
+            // PageView
+            Expanded(
+              child: PageView.builder(
+                controller: _controller,
+                onPageChanged: (index) {
+                  setState(() => _currentPage = index);
+                },
+                itemCount: onboardingData.length,
+                itemBuilder: (context, index) {
+                  final item = onboardingData[index];
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(item["image"]!, height: 250),
+                      const SizedBox(height: 24),
+                      Text(
+                        item["title"]!,
+                        style: const TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 12),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: Text(
+                          item["description"]!,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: Colors.grey,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ),
+
+            // Indicator + Next button
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SmoothPageIndicator(
+                    controller: _controller,
+                    count: onboardingData.length,
+                    effect: const WormEffect(
+                      dotHeight: 10,
+                      dotWidth: 10,
+                      activeDotColor: Colors.blue,
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: _nextPage,
+                    child: Text(
+                      _currentPage == onboardingData.length - 1
+                          ? "Done"
+                          : "Next",
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
