@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:julybyoma_app/features/home/home.dart';
+import 'package:julybyoma_app/features/auth/presentation/pages/login.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -15,28 +15,28 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   final List<Map<String, String>> onboardingData = [
     {
-      "image": "assets/images/onboard1.png",
+      "image": "assets/images/slider1.png",
       "title": "Welcome to JulyByOma",
       "description":
           "Discover amazing features that make your journey smooth and exciting.",
     },
     {
-      "image": "assets/images/onboard2.png",
+      "image": "assets/images/slider1.png",
       "title": "Track Your Progress",
       "description":
           "Easily manage and track everything right from your dashboard.",
     },
     {
-      "image": "assets/images/onboard3.png",
+      "image": "assets/images/slider1.png",
       "title": "Stay Connected",
       "description": "Engage with the community and stay updated always.",
     },
   ];
 
-  void _goToHome() {
+  void _goToLogin() {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (_) => const HomeWidget()),
+      MaterialPageRoute(builder: (_) => const LoginWidget()),
     );
   }
 
@@ -47,7 +47,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         curve: Curves.easeInOut,
       );
     } else {
-      _goToHome();
+      _goToLogin();
     }
   }
 
@@ -81,7 +81,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
                   TextButton(
                     onPressed: () {
-                      _goToHome();
+                      _goToLogin();
                     },
                     child: const Text("Skip"),
                   ),
@@ -89,7 +89,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             ),
 
-            // PageView
             Expanded(
               child: PageView.builder(
                 controller: _controller,
@@ -130,7 +129,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             ),
 
-            // Indicator + Next button
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
               child: Row(
@@ -151,6 +149,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       _currentPage == onboardingData.length - 1
                           ? "Done"
                           : "Next",
+                      style: TextStyle(color: Colors.white),
                     ),
                   ),
                 ],

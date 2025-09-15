@@ -13,14 +13,14 @@ import 'package:julybyoma_app/features/theme/presentation/bloc/theme_bloc.dart';
 import 'package:julybyoma_app/features/theme/presentation/bloc/theme_events.dart';
 import 'package:julybyoma_app/features/theme/presentation/bloc/theme_state.dart';
 
-class HomeWidget extends StatefulWidget {
-  const HomeWidget({super.key});
+class HomeBackupWidget extends StatefulWidget {
+  const HomeBackupWidget({super.key});
 
   @override
-  State<HomeWidget> createState() => _HomeWidgetState();
+  State<HomeBackupWidget> createState() => _HomeWidgetState();
 }
 
-class _HomeWidgetState extends State<HomeWidget> {
+class _HomeWidgetState extends State<HomeBackupWidget> {
   @override
   void initState() {
     super.initState();

@@ -38,6 +38,9 @@ dependencies:
   get_it: ^8.2.0
   shared_preferences: ^2.5.3
   smooth_page_indicator: ^1.2.1
+  dartz: ^0.10.1
+  dio: ^5.9.0
+  logger: ^2.6.1
 
 dev_dependencies:
   flutter_test:
@@ -62,8 +65,11 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/images/slider1.png
+    - assets/images/facebook.png
+    - assets/images/apple.png
+    - assets/images/google.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
