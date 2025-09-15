@@ -1,16 +1,54 @@
-# julybyoma_app
+# Flutter E-commerce App
 
-A new Flutter project.
+This project is a Flutter E-commerce Mobile Application built with Clean Architecture and BLoC (Business Logic Component) for state management. It provides a scalable, testable, and maintainable codebase that follows SOLID principles.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## Features
 
-A few resources to get you started if this is your first Flutter project:
+- Onboarding screens with smooth page indicators
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Authentication (Login / Register)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Product listing & product details
+
+- Shopping cart with checkout flow
+
+- Persistent local storage with SharedPreferences
+
+- REST API integration using Dio
+
+- Centralized dependency injection using GetIt
+
+- Error handling with Dartz (Either & Option types)
+
+- Logging with Logger for debugging
+
+## Architecture
+
+This app follows Clean Architecture with separation of concerns into 3 main layers:
+
+```bash
+
+lib/
+├── core/                # Shared utilities (errors, constants, helpers)
+├── features/            # Each feature has its own folder
+│   ├── auth/
+│   │   ├── data/        # Data layer (repositories, datasources, models)
+│   │   ├── domain/      # Domain layer (entities, repositories, use cases)
+│   │   ├── presentation/# Presentation layer (bloc, pages, widgets)
+│   │
+│   ├── product/
+│   │   ├── data/
+│   │   ├── domain/
+│   │   ├── presentation/
+│   │
+│   └── cart/
+│       ├── data/
+│       ├── domain/
+│       ├── presentation/
+│
+├── injection.dart       # GetIt service locator setup
+└── main.dart            # Entry point
+
+
+```

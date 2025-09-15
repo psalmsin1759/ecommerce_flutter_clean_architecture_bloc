@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:julybyoma_app/common/bloc/auth/auth_state_cubit.dart';
 import 'package:julybyoma_app/common/bloc/auth/auth_state.dart';
 import 'package:julybyoma_app/common/bloc/button/button_state_cubit.dart';
-import 'package:julybyoma_app/core/get_it/get_it.dart';
+import 'package:julybyoma_app/injection.dart';
 import 'package:julybyoma_app/core/theme/app_theme.dart';
 import 'package:julybyoma_app/features/auth/presentation/bloc/user_state_cubit.dart';
 import 'package:julybyoma_app/features/auth/presentation/pages/onboardiing_screen.dart';

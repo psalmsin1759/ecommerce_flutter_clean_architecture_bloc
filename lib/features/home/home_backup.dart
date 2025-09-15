@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:julybyoma_app/common/bloc/button/button_state.dart';
 import 'package:julybyoma_app/common/bloc/button/button_state_cubit.dart';
-import 'package:julybyoma_app/core/get_it/get_it.dart';
+import 'package:julybyoma_app/injection.dart';
 import 'package:julybyoma_app/features/auth/domain/usecases/get_user_usecase.dart';
 import 'package:julybyoma_app/features/auth/domain/usecases/logout_usecase.dart';
 import 'package:julybyoma_app/features/auth/presentation/bloc/user_state.dart';

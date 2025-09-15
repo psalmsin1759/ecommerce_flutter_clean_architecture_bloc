@@ -4,7 +4,7 @@ import 'package:julybyoma_app/common/bloc/button/button_state.dart';
 import 'package:julybyoma_app/common/bloc/button/button_state_cubit.dart';
 import 'package:julybyoma_app/common/widget/custom_rounded_button.dart';
 import 'package:julybyoma_app/common/widget/custom_text_field.dart';
-import 'package:julybyoma_app/core/get_it/get_it.dart';
+import 'package:julybyoma_app/injection.dart';
 import 'package:julybyoma_app/features/auth/data/models/login_request.dart';
 import 'package:julybyoma_app/features/auth/domain/usecases/login_usecase.dart';
 import 'package:julybyoma_app/features/auth/presentation/pages/register.dart';

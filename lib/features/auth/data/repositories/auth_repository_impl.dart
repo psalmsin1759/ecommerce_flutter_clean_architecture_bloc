@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:julybyoma_app/core/get_it/get_it.dart';
+import 'package:julybyoma_app/injection.dart';
 import 'package:julybyoma_app/features/auth/data/models/login_request.dart';
 import 'package:julybyoma_app/features/auth/data/models/signup_request.dart';
 import 'package:julybyoma_app/features/auth/data/models/user_model.dart';
