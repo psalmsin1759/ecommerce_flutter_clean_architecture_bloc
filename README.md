@@ -52,3 +52,61 @@ lib/
 
 
 ```
+
+## Layer Responsibilities
+
+- Domain Layer
+
+Business rules (Entities, Use Cases, Repository contracts).
+
+- Data Layer
+
+Implements repositories using Dio for API calls and SharedPreferences for local persistence.
+
+- Presentation Layer
+
+Handles UI with Flutter widgets and Bloc/Cubit for state management.
+
+
+## Getting Started
+### Prerequisites
+
+- Flutter SDK >= 3.x
+
+- Dart >= 3.x
+
+### Installation
+
+
+- Clone the repository
+
+```bash
+git clone https://github.com/psalmsin1759/ecommerce_flutter_clean_architecture_bloc.git
+cd ecommerce_flutter_clean_architecture_bloc
+
+```
+### Get dependencies
+```bash
+flutter pub get
+```
+
+### Run the app
+```bash
+flutter run
+
+```
+
+
+### Testing
+
+Run unit tests with:
+```bash
+flutter test
+
+```
+
+### Screenshots
+
+![Screen1](./docs/screen1.png)
+![Screen2](./docs/screen2.png)
+![Screen3](./docs/screen3.png)
