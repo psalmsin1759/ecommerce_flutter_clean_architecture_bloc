@@ -4,4 +4,6 @@ class ApiUrls {
   static const signUpURL = "$baseUrl/users/register";
 
   static const loginURL = "$baseUrl/users/login";
+
+  static const categoryURL = "$baseUrl/categories";
 }

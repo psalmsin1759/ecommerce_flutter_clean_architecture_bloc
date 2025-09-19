@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:julybyoma_app/core/theme/app_color.dart';
 import 'package:julybyoma_app/features/auth/presentation/pages/login.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -74,7 +75,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   if (_currentPage > 0)
                     TextButton(
                       onPressed: _prevPage,
-                      child: const Text("Previous"),
+                      child: const Text(
+                        "Previous",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     )
                   else
                     const SizedBox(width: 80),
@@ -83,7 +90,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     onPressed: () {
                       _goToLogin();
                     },
-                    child: const Text("Skip"),
+                    child: const Text(
+                      "Skip",
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -123,6 +136,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           textAlign: TextAlign.center,
                         ),
                       ),
+                      const SizedBox(height: 30),
+                      SmoothPageIndicator(
+                        controller: _controller,
+                        count: onboardingData.length,
+                        effect: const WormEffect(
+                          dotHeight: 10,
+                          dotWidth: 10,
+                          activeDotColor: AppColor.primary,
+                        ),
+                      ),
                     ],
                   );
                 },
@@ -131,30 +154,22 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SmoothPageIndicator(
-                    controller: _controller,
-                    count: onboardingData.length,
-                    effect: const WormEffect(
-                      dotHeight: 10,
-                      dotWidth: 10,
-                      activeDotColor: Colors.blue,
-                    ),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColor.primary,
+                  minimumSize: const Size(double.infinity, 60),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                  ElevatedButton(
-                    onPressed: _nextPage,
-                    child: Text(
-                      _currentPage == onboardingData.length - 1
-                          ? "Done"
-                          : "Next",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ],
+                ),
+                onPressed: _nextPage,
+                child: Text(
+                  _currentPage == onboardingData.length - 1 ? "Done" : "Next",
+                  style: const TextStyle(color: Colors.white, fontSize: 16),
+                ),
               ),
             ),
+            const SizedBox(height: 50),
           ],
         ),
       ),

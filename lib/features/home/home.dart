@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:julybyoma_app/common/bloc/button/button_state.dart';
-import 'package:julybyoma_app/common/bloc/button/button_state_cubit.dart';
-import 'package:julybyoma_app/injection.dart';
-import 'package:julybyoma_app/features/auth/domain/usecases/get_user_usecase.dart';
-import 'package:julybyoma_app/features/auth/domain/usecases/logout_usecase.dart';
-import 'package:julybyoma_app/features/auth/presentation/bloc/user_state.dart';
-import 'package:julybyoma_app/features/auth/presentation/bloc/user_state_cubit.dart';
-import 'package:julybyoma_app/features/auth/presentation/pages/login.dart';
+import 'package:julybyoma_app/features/home/drawer.dart';
+import 'package:julybyoma_app/features/home/main_home.dart';
 import 'package:julybyoma_app/features/theme/domain/entity/theme_entity.dart';
 import 'package:julybyoma_app/features/theme/presentation/bloc/theme_bloc.dart';
 import 'package:julybyoma_app/features/theme/presentation/bloc/theme_events.dart';
@@ -21,11 +15,21 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
-  @override
-  void initState() {
-    super.initState();
+  int _selectedIndex = 0;
 
-    context.read<UserStateCubit>().execute(useCase: getIt<GetUserUseCase>());
+  final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
+
+  final List<Widget> _pages = const [
+    MainHomeWidget(),
+    Center(child: Text("Cart Page", style: TextStyle(fontSize: 20))),
+    Center(child: Text("Orders Page", style: TextStyle(fontSize: 20))),
+    Center(child: Text("Profile Page", style: TextStyle(fontSize: 20))),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 
   @override
@@ -33,101 +37,121 @@ class _HomeWidgetState extends State<HomeWidget> {
     return BlocBuilder<ThemeBloc, ThemeState>(
       builder: (context, state) {
         final isDark = state.themeEntity?.themeType == ThemeType.dark;
-
         return Scaffold(
-          appBar: AppBar(
-            title: const Text("JulyByOma"),
-            actions: [
-              IconButton(
-                onPressed: () {
-                  context.read<ThemeBloc>().add(ToggleThemeEvent());
-                },
-                icon: Icon(isDark ? Icons.light_mode : Icons.dark_mode),
+          key: _globalKey,
+          drawer: DrawerWidget(),
+          body: SafeArea(
+            child: Padding(
+              padding: EdgeInsets.only(left: 10, right: 10),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          _globalKey.currentState?.openDrawer();
+                        },
+                        icon: const Icon(Icons.menu),
+                      ),
+                      Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () {},
+                            child: Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                color: Colors.grey[300],
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Stack(
+                                clipBehavior: Clip.none,
+                                children: [
+                                  const Center(
+                                    child: Icon(
+                                      Icons.shopping_bag_outlined,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  Positioned(
+                                    top: -2,
+                                    right: -2,
+                                    child: Container(
+                                      padding: const EdgeInsets.all(2),
+                                      decoration: BoxDecoration(
+                                        color: Colors.red,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      constraints: const BoxConstraints(
+                                        minWidth: 16,
+                                        minHeight: 16,
+                                      ),
+                                      child: const Center(
+                                        child: Text(
+                                          "0",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 10),
+                          GestureDetector(
+                            onTap: () => context.read<ThemeBloc>().add(
+                              ToggleThemeEvent(),
+                            ),
+                            child: Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                color: Colors.grey[300],
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Icon(
+                                color: Colors.black,
+                                isDark
+                                    ? Icons.light_mode_outlined
+                                    : Icons.dark_mode_outlined,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Expanded(child: _pages[_selectedIndex]),
+                ],
+              ),
+            ),
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+            elevation: 8,
+            items: const [
+              BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.shopping_cart),
+                label: "Cart",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.list_alt),
+                label: "Orders",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+                label: "Profile",
               ),
             ],
-          ),
-          body: SafeArea(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // USER DETAILS
-                BlocBuilder<UserStateCubit, UserState>(
-                  builder: (context, state) {
-                    if (state is UserLoading) {
-                      return const Center(child: CircularProgressIndicator());
-                    } else if (state is UserLoaded) {
-                      final user = state.user;
-                      return Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "ID: ${user.id}",
-                              style: const TextStyle(fontSize: 16),
-                            ),
-                            Text(
-                              "Name: ${user.firstName} ${user.lastName}",
-                              style: const TextStyle(fontSize: 16),
-                            ),
-                            Text(
-                              "Email: ${user.email}",
-                              style: const TextStyle(fontSize: 16),
-                            ),
-                          ],
-                        ),
-                      );
-                    } else if (state is UserError) {
-                      return Center(
-                        child: Text(
-                          "Error: ${state.message}",
-                          style: const TextStyle(color: Colors.red),
-                        ),
-                      );
-                    }
-                    return const SizedBox();
-                  },
-                ),
-
-                const Divider(),
-
-                // TOGGLE THEME
-                ElevatedButton(
-                  onPressed: () {
-                    context.read<ThemeBloc>().add(ToggleThemeEvent());
-                  },
-                  child: const Text("Toggle Theme"),
-                ),
-
-                // LOGOUT
-                BlocConsumer<ButtonStateCubit, ButtonState>(
-                  listener: (context, state) {
-                    if (state is ButtonSuccessState) {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const LoginWidget(),
-                        ),
-                      );
-                    } else if (state is ButtonFailureState) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text(state.errorMessage)),
-                      );
-                    }
-                  },
-                  builder: (context, state) {
-                    return ElevatedButton(
-                      onPressed: () {
-                        context.read<ButtonStateCubit>().execute(
-                          useCase: getIt<LogoutUseCase>(),
-                        );
-                      },
-                      child: const Text("Logout"),
-                    );
-                  },
-                ),
-              ],
-            ),
+            currentIndex: _selectedIndex,
+            onTap: _onItemTapped,
+            type: BottomNavigationBarType.fixed,
           ),
         );
       },

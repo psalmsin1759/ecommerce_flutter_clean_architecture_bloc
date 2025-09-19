@@ -6,6 +6,7 @@ class AppTheme {
   static ThemeData getTheme(bool isDark) {
     return ThemeData(
       useMaterial3: false,
+      fontFamily: 'Poppins',
       colorScheme: ColorScheme(
         brightness: isDark ? Brightness.dark : Brightness.light,
         primary: AppColor.primary,

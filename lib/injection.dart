@@ -13,6 +13,9 @@ import 'package:julybyoma_app/features/auth/domain/usecases/logout_usecase.dart'
 import 'package:julybyoma_app/features/auth/domain/usecases/save_user_usecase.dart';
 import 'package:julybyoma_app/features/auth/domain/usecases/signup_usecase.dart';
 import 'package:julybyoma_app/features/auth/presentation/bloc/user_state_cubit.dart';
+import 'package:julybyoma_app/features/category/data/repositories/category_repository_impl.dart';
+import 'package:julybyoma_app/features/category/domain/repository/category_respository.dart';
+import 'package:julybyoma_app/features/category/presentation/bloc/category_bloc.dart';
 import 'package:julybyoma_app/features/theme/data/datasource/theme_local_datasource.dart';
 import 'package:julybyoma_app/features/theme/data/repository/theme_repository_impl.dart';
 import 'package:julybyoma_app/features/theme/domain/repository/theme_repository.dart';
@@ -72,4 +75,6 @@ Future<void> init() async {
   getIt.registerSingleton<SaveUserUseCase>(SaveUserUseCase());
 
   getIt.registerSingleton<GetUserUseCase>(GetUserUseCase());
+
+  getIt.registerSingleton<CategoryRepository>(CategoryRepositoryImpl());
 }
