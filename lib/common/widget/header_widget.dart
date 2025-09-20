@@ -24,9 +24,9 @@ class HeaderWidget extends StatelessWidget {
                 height: 40,
                 decoration: BoxDecoration(
                   color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(20),
                 ),
-                child: const Icon(Icons.arrow_back, color: Colors.black),
+                child: const Icon(Icons.arrow_back, color: Colors.black45),
               ),
             ),
             Text(
@@ -41,7 +41,7 @@ class HeaderWidget extends StatelessWidget {
                     height: 40,
                     width: 40,
                     decoration: BoxDecoration(
-                      color: Colors.grey[300],
+                      color: Colors.grey[200],
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Stack(
@@ -50,7 +50,7 @@ class HeaderWidget extends StatelessWidget {
                         const Center(
                           child: Icon(
                             Icons.shopping_bag_outlined,
-                            color: Colors.black,
+                            color: Colors.black45,
                           ),
                         ),
                         Positioned(
@@ -90,11 +90,11 @@ class HeaderWidget extends StatelessWidget {
                     height: 40,
                     width: 40,
                     decoration: BoxDecoration(
-                      color: Colors.grey[300],
+                      color: Colors.grey[200],
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Icon(
-                      color: Colors.black,
+                      color: Colors.black45,
                       isDark
                           ? Icons.light_mode_outlined
                           : Icons.dark_mode_outlined,

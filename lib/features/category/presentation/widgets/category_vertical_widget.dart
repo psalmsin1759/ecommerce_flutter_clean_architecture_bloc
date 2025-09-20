@@ -4,7 +4,7 @@ import 'package:julybyoma_app/features/category/domain/usecase/get_category_usec
 import 'package:julybyoma_app/features/category/presentation/bloc/category_bloc.dart';
 import 'package:julybyoma_app/features/category/presentation/bloc/category_event.dart';
 import 'package:julybyoma_app/features/category/presentation/bloc/category_state.dart';
-import 'package:julybyoma_app/features/category/presentation/pages/category_widget.dart';
+import 'package:julybyoma_app/features/product/presentation/pages/product_category_widget.dart';
 import 'package:shimmer/shimmer.dart';
 
 class CategoryVerticalListWidget extends StatelessWidget {
@@ -49,7 +49,8 @@ class CategoryVerticalListWidget extends StatelessWidget {
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => CategoryWidget(category: category),
+                      builder: (context) =>
+                          ProductByCategoryWidget(category: category),
                     ),
                   ),
                   leading: const Icon(Icons.category, color: Colors.blueAccent),

@@ -6,4 +6,6 @@ class ApiUrls {
   static const loginURL = "$baseUrl/users/login";
 
   static const categoryURL = "$baseUrl/categories";
+
+  static const productsURL = "$baseUrl/products";
 }

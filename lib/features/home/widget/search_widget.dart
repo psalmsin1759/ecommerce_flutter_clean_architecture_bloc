@@ -37,7 +37,7 @@ class SearchBarWithFilter extends StatelessWidget {
                 horizontal: 16,
               ),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(25),
                 borderSide: BorderSide.none,
               ),
               filled: true,

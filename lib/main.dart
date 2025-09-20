@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:julybyoma_app/common/bloc/auth/auth_state_cubit.dart';
 import 'package:julybyoma_app/common/bloc/auth/auth_state.dart';
 import 'package:julybyoma_app/common/bloc/button/button_state_cubit.dart';
+import 'package:julybyoma_app/features/product/data/models/product_model.dart';
 import 'package:julybyoma_app/injection.dart';
 import 'package:julybyoma_app/core/theme/app_theme.dart';
 import 'package:julybyoma_app/features/auth/presentation/bloc/user_state_cubit.dart';
@@ -12,9 +15,19 @@ import 'package:julybyoma_app/features/theme/domain/entity/theme_entity.dart';
 import 'package:julybyoma_app/features/theme/presentation/bloc/theme_bloc.dart';
 import 'package:julybyoma_app/features/theme/presentation/bloc/theme_events.dart';
 import 'package:julybyoma_app/features/theme/presentation/bloc/theme_state.dart';
+import 'package:path_provider/path_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  final dir = await getApplicationDocumentsDirectory();
+
+  await Hive.initFlutter(dir.path);
+
+  Hive.registerAdapter(ProductModelAdapter());
+  Hive.registerAdapter(VariantsModelAdapter());
+  Hive.registerAdapter(AttributesModelAdapter());
+  Hive.registerAdapter(ImagesModelAdapter());
+  Hive.registerAdapter(ReviewsModelAdapter());
 
   await init();
 

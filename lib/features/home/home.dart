@@ -45,7 +45,7 @@ class _HomeWidgetState extends State<HomeWidget> {
               padding: EdgeInsets.only(left: 10, right: 10),
               child: Column(
                 children: [
-                  Row(
+                  /* Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       IconButton(
@@ -126,7 +126,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                         ],
                       ),
                     ],
-                  ),
+                  ), */
                   Expanded(child: _pages[_selectedIndex]),
                 ],
               ),

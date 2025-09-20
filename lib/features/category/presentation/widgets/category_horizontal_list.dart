@@ -4,7 +4,7 @@ import 'package:julybyoma_app/features/category/domain/usecase/get_category_usec
 import 'package:julybyoma_app/features/category/presentation/bloc/category_bloc.dart';
 import 'package:julybyoma_app/features/category/presentation/bloc/category_state.dart';
 import 'package:julybyoma_app/features/category/presentation/bloc/category_event.dart';
-import 'package:julybyoma_app/features/category/presentation/pages/category_widget.dart';
+import 'package:julybyoma_app/features/product/presentation/pages/product_category_widget.dart';
 import 'package:julybyoma_app/features/category/presentation/widgets/category_card.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -61,7 +61,7 @@ class CategoryHorizontalListWidget extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            CategoryWidget(category: category),
+                            ProductByCategoryWidget(category: category),
                       ),
                     ),
                     child: CategoryCard(category: category),
