@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:julybyoma_app/features/cart/presentation/pages/cart_home_widget.dart';
 import 'package:julybyoma_app/features/home/drawer.dart';
 import 'package:julybyoma_app/features/home/main_home.dart';
 import 'package:julybyoma_app/features/theme/domain/entity/theme_entity.dart';
@@ -21,7 +22,7 @@ class _HomeWidgetState extends State<HomeWidget> {
 
   final List<Widget> _pages = const [
     MainHomeWidget(),
-    Center(child: Text("Cart Page", style: TextStyle(fontSize: 20))),
+    CartHomeWidget(),
     Center(child: Text("Orders Page", style: TextStyle(fontSize: 20))),
     Center(child: Text("Profile Page", style: TextStyle(fontSize: 20))),
   ];

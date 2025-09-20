@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:julybyoma_app/features/auth/domain/usecases/get_user_usecase.dart';
 import 'package:julybyoma_app/features/auth/presentation/bloc/user_state.dart';
 import 'package:julybyoma_app/features/auth/presentation/bloc/user_state_cubit.dart';
+import 'package:julybyoma_app/features/cart/presentation/bloc/cart_bloc.dart';
+import 'package:julybyoma_app/features/cart/presentation/bloc/cart_state.dart';
+import 'package:julybyoma_app/features/cart/presentation/pages/cart_widget.dart';
 import 'package:julybyoma_app/features/category/presentation/pages/all_categories_widget.dart';
 import 'package:julybyoma_app/features/category/presentation/widgets/category_horizontal_list.dart';
 import 'package:julybyoma_app/features/home/widget/promo_slider.dart';
@@ -98,52 +101,69 @@ class _MainHomeWidgetState extends State<MainHomeWidget> {
 
                     Row(
                       children: [
-                        GestureDetector(
-                          onTap: () {},
-                          child: Container(
-                            height: 40,
-                            width: 40,
-                            decoration: BoxDecoration(
-                              color: Colors.grey[200],
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Stack(
-                              clipBehavior: Clip.none,
-                              children: [
-                                const Center(
-                                  child: Icon(
-                                    Icons.shopping_bag_outlined,
-                                    color: Colors.black45,
+                        BlocBuilder<CartBloc, CartState>(
+                          builder: (context, cartState) {
+                            int count = 0;
+                            if (cartState is CartLoaded) {
+                              count = cartState.count;
+                            }
+
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => CartWidget(),
                                   ),
+                                );
+                              },
+                              child: Container(
+                                height: 40,
+                                width: 40,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[200],
+                                  borderRadius: BorderRadius.circular(20),
                                 ),
-                                Positioned(
-                                  top: -2,
-                                  right: -2,
-                                  child: Container(
-                                    padding: const EdgeInsets.all(2),
-                                    decoration: BoxDecoration(
-                                      color: Colors.red,
-                                      shape: BoxShape.circle,
-                                    ),
-                                    constraints: const BoxConstraints(
-                                      minWidth: 16,
-                                      minHeight: 16,
-                                    ),
-                                    child: const Center(
-                                      child: Text(
-                                        "0",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                child: Stack(
+                                  clipBehavior: Clip.none,
+                                  children: [
+                                    const Center(
+                                      child: Icon(
+                                        Icons.shopping_bag_outlined,
+                                        color: Colors.black45,
                                       ),
                                     ),
-                                  ),
+                                    if (count > 0)
+                                      Positioned(
+                                        top: -2,
+                                        right: -2,
+                                        child: Container(
+                                          padding: const EdgeInsets.all(2),
+                                          decoration: const BoxDecoration(
+                                            color: Colors.red,
+                                            shape: BoxShape.circle,
+                                          ),
+                                          constraints: const BoxConstraints(
+                                            minWidth: 16,
+                                            minHeight: 16,
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              "$count",
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 13,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                          ),
+                              ),
+                            );
+                          },
                         ),
                         SizedBox(width: 10),
                         GestureDetector(

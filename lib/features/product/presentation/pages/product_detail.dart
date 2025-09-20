@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:julybyoma_app/common/widget/header_widget.dart';
+import 'package:julybyoma_app/features/cart/domain/entities/cart_item_entity.dart';
+import 'package:julybyoma_app/features/cart/presentation/bloc/cart_bloc.dart';
+import 'package:julybyoma_app/features/cart/presentation/bloc/cart_event.dart';
 import 'package:julybyoma_app/features/product/domain/entities/product_entiity.dart';
 import 'package:julybyoma_app/features/product/presentation/widgets/product_card.dart';
 
@@ -161,7 +165,32 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget> {
                                 vertical: 12,
                               ),
                             ),
-                            onPressed: product.isInStock == true ? () {} : null,
+                            onPressed: product.isInStock == true
+                                ? () {
+                                    final cartItem = CartItemEntity(
+                                      productId: product.sId ?? "",
+                                      name: product.name ?? "",
+                                      price:
+                                          product.salePrice ??
+                                          product.price ??
+                                          0,
+                                      quantity: _quantity,
+                                      image: product.images?.isNotEmpty == true
+                                          ? product.images!.first.url
+                                          : null,
+                                    );
+
+                                    context.read<CartBloc>().add(
+                                      AddToCartEvent(cartItem),
+                                    );
+
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text("Added to cart!"),
+                                      ),
+                                    );
+                                  }
+                                : null,
                             icon: const Icon(
                               Icons.shopping_cart,
                               color: Colors.white,

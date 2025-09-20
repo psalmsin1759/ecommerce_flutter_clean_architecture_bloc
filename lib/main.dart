@@ -5,6 +5,12 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:julybyoma_app/common/bloc/auth/auth_state_cubit.dart';
 import 'package:julybyoma_app/common/bloc/auth/auth_state.dart';
 import 'package:julybyoma_app/common/bloc/button/button_state_cubit.dart';
+import 'package:julybyoma_app/features/cart/domain/usecases/add_to_cart_use_case.dart';
+import 'package:julybyoma_app/features/cart/domain/usecases/clear_cart_use_case.dart';
+import 'package:julybyoma_app/features/cart/domain/usecases/get_cart_use_case.dart';
+import 'package:julybyoma_app/features/cart/domain/usecases/remove_from_cart_use_case.dart';
+import 'package:julybyoma_app/features/cart/domain/usecases/update_quantity_use_case.dart';
+import 'package:julybyoma_app/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:julybyoma_app/features/product/data/models/product_model.dart';
 import 'package:julybyoma_app/injection.dart';
 import 'package:julybyoma_app/core/theme/app_theme.dart';
@@ -46,6 +52,8 @@ Future<void> main() async {
         ),
 
         BlocProvider<UserStateCubit>(create: (_) => getIt<UserStateCubit>()),
+
+        BlocProvider<CartBloc>(create: (_) => getIt<CartBloc>()..getCart()),
       ],
       child: const MyApp(),
     ),

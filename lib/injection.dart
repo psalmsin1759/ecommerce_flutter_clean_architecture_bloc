@@ -15,6 +15,15 @@ import 'package:julybyoma_app/features/auth/domain/usecases/logout_usecase.dart'
 import 'package:julybyoma_app/features/auth/domain/usecases/save_user_usecase.dart';
 import 'package:julybyoma_app/features/auth/domain/usecases/signup_usecase.dart';
 import 'package:julybyoma_app/features/auth/presentation/bloc/user_state_cubit.dart';
+import 'package:julybyoma_app/features/cart/data/repositories/cart_repository_impl.dart';
+import 'package:julybyoma_app/features/cart/domain/repositories/cart_repository.dart';
+import 'package:julybyoma_app/features/cart/domain/usecases/add_to_cart_use_case.dart';
+import 'package:julybyoma_app/features/cart/domain/usecases/clear_cart_use_case.dart';
+import 'package:julybyoma_app/features/cart/domain/usecases/get_cart_use_case.dart';
+import 'package:julybyoma_app/features/cart/domain/usecases/remove_from_cart_use_case.dart';
+import 'package:julybyoma_app/features/cart/domain/usecases/update_quantity_use_case.dart';
+import 'package:julybyoma_app/features/cart/presentation/bloc/cart_bloc.dart';
+import 'package:julybyoma_app/features/cart/presentation/bloc/cart_event.dart';
 import 'package:julybyoma_app/features/category/data/repositories/category_repository_impl.dart';
 import 'package:julybyoma_app/features/category/domain/repository/category_respository.dart';
 import 'package:julybyoma_app/features/category/presentation/bloc/category_bloc.dart';
@@ -134,4 +143,18 @@ Future<void> init() async {
       getProductsByCategory: getIt<GetProductsByCategoryUseCase>(),
     ),
   );
+
+  getIt.registerSingleton<CartRepository>(CartRepositoryImpl());
+
+  getIt.registerSingleton<AddToCartUseCase>(AddToCartUseCase());
+
+  getIt.registerSingleton<ClearCartUseCase>(ClearCartUseCase());
+
+  getIt.registerSingleton<GetCartUseCase>(GetCartUseCase());
+
+  getIt.registerSingleton<RemoveFromCartUseCase>(RemoveFromCartUseCase());
+
+  getIt.registerSingleton<UpdateQuantityUseCase>(UpdateQuantityUseCase());
+
+  getIt.registerSingleton<CartBloc>(CartBloc());
 }
