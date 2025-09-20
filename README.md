@@ -113,7 +113,7 @@ flutter test
 
 ### Screenshots
 
-![Screen1](./docs/screen1.png)
+![Screen1](./docs/screenshot.png)
 ![Screen2](./docs/screen2.png)
 ![Screen3](./docs/screen3.png)
 
