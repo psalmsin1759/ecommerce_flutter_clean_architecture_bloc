@@ -110,3 +110,9 @@ flutter test
 ![Screen1](./docs/screen1.png)
 ![Screen2](./docs/screen2.png)
 ![Screen3](./docs/screen3.png)
+
+### Demo Video
+
+<video src="./docs/demo.mp4" controls="controls" width="300" height="600">
+  Your browser does not support the video tag.
+</video>
