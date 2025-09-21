@@ -107,14 +107,15 @@ flutter test
 
 ### Demo Video
 
-<video src="./docs/demo.mp4" controls="controls" width="300" height="600">
-  Your browser does not support the video tag.
-</video>
+[![Watch the demo](./docs/screen1.png)](https://github.com/psalmsin1759/ecommerce_flutter_clean_architecture_bloc/docs/demo.mp4)
+
+
 
 ### Screenshots
 
 ![Screen1](./docs/screenshot.png)
 ![Screen2](./docs/screen2.png)
 ![Screen3](./docs/screen3.png)
+![Screen3](./docs/screen4.png)
 
 
